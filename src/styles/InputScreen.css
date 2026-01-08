@@ -124,22 +124,6 @@
   66% { transform: translate(-15px, 20px) scale(0.9); }
 }
 
-/* Typing Wave Effect */
-.typing-wave {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(circle, rgba(163, 177, 182, 0.1) 0%, transparent 70%);
-  border-radius: var(--radius-full);
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
-  z-index: 2;
-}
-
 /* Container */
 .input-container {
   width: 100%;
@@ -298,14 +282,8 @@
   z-index: 3;
   min-height: 200px;
   transform: translateY(0);
-  animation: textareaFloat 4s ease-in-out infinite;
-  animation-play-state: paused;
 }
 
-@keyframes textareaFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
 
 .thought-input:focus {
   outline: none;
@@ -508,9 +486,10 @@
   transition: all 0.3s ease;
 }
 
-.submit-button.active:hover .submit-arrow {
-  transform: translate(3px, -3px);
+.submit-button.active:hover {
+  transform: translateY(-1px);
 }
+
 
 /* Guidelines */
 .guidelines {

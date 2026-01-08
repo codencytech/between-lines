@@ -8,7 +8,7 @@ const LandingScreen = ({ onBegin }) => {
   const ref = useRef(null)
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 400)
+    const t = setTimeout(() => setLoaded(true), 500)
     return () => clearTimeout(t)
   }, [])
 
@@ -16,8 +16,8 @@ const LandingScreen = ({ onBegin }) => {
     if (!ref.current || leaving) return
     const r = ref.current.getBoundingClientRect()
     setMouse({
-      x: (e.clientX / r.width - 0.5),
-      y: (e.clientY / r.height - 0.5),
+      x: e.clientX / r.width - 0.5,
+      y: e.clientY / r.height - 0.5,
     })
   }
 
@@ -27,12 +27,10 @@ const LandingScreen = ({ onBegin }) => {
 
     const el = ref.current
     if (el) {
-      el.style.opacity = '0'
-      el.style.transform = 'scale(0.97)'
-      el.style.filter = 'blur(6px)'
+      el.classList.add('leaving')
     }
 
-    setTimeout(onBegin, 700)
+    setTimeout(onBegin, 900)
   }
 
   return (
@@ -42,17 +40,18 @@ const LandingScreen = ({ onBegin }) => {
       onMouseMove={onMove}
       onMouseLeave={() => !leaving && setMouse({ x: 0, y: 0 })}
     >
-      {/* Background */}
+      {/* Emotional background */}
       <div className="bg-base">
-        <div className="bg-glow" />
+        <div className="bg-light-field" />
+        <div className="bg-depth" />
         <div className="bg-grain" />
       </div>
 
-      {/* Floating atmosphere */}
+      {/* Breathing atmosphere */}
       <div
         className="atmosphere"
         style={{
-          transform: `translate3d(${mouse.x * 18}px, ${mouse.y * 18}px,0)`,
+          transform: `translate3d(${mouse.x * 14}px, ${mouse.y * 14}px,0)`,
         }}
       />
 
@@ -61,7 +60,7 @@ const LandingScreen = ({ onBegin }) => {
         <h1
           className="headline"
           style={{
-            transform: `translate3d(${mouse.x * -6}px, ${mouse.y * -6}px,0)`,
+            transform: `translate3d(${mouse.x * -4}px, ${mouse.y * -4}px,0)`,
           }}
         >
           Some thoughts are loud.
@@ -70,9 +69,9 @@ const LandingScreen = ({ onBegin }) => {
         </h1>
 
         <p className="subtitle">
-          A calm space where AI listens
+          A quiet space that listens first —
           <br />
-          and responds through voices you miss.
+          and responds in a voice you trust.
         </p>
 
         <button className="begin-button" onClick={begin} disabled={leaving}>
@@ -80,7 +79,7 @@ const LandingScreen = ({ onBegin }) => {
         </button>
       </div>
 
-      {/* Frame */}
+      {/* Soft focus frame */}
       <div className="soft-frame" />
     </div>
   )
